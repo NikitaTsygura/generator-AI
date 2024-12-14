@@ -42,5 +42,5 @@ template for djando start project.
 ```bash
 pip istall requests.txt
 ```
-
+<hr>
 6. Створення нового проєкту Django
