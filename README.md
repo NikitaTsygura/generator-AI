@@ -55,3 +55,7 @@ django-admin startproject project .
 
 python manage.py startapp app
 ```
+<hr>
+<b>Увага:</b>
+
+templates універсальна папка, и якщо ми хочемо додати шаблон для app, ми створили папку app і в ній всі шаблони.
