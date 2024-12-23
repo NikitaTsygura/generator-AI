@@ -55,3 +55,7 @@ django-admin startproject project .
 
 python manage.py startapp app
 ```
+<hr>
+Увага:
+Шаблони для додатку app, додаються в папці templates. Якщо додаються додаткові додатки, там створюються так само папка templates.
+,
