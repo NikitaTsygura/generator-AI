@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Головна - ШІ Генератор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+        }
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            padding: 30px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .response {
+            margin-top: 20px;
+        }
+        .image {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="/">Головна</a>
+        <a href="/login">Увійти</a> / <a href="/register">Зареєструватися</a>
+    </nav>
+</header>
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <label for="prompt">Введіть запит:</label>
+        <input type="text" id="prompt" name="prompt" placeholder="Наприклад: Згенеруй пейзаж із замком">
+        <button type="submit">Відправити</button>
+
+        {% if response_text %}
+        <div class="response">
+            <h3>Відповідь:</h3>
+            <p>{{ response_text }}</p>
+        </div>
+        {% endif %}
+
+        {% if image_url %}
+        <div class="image">
+            <h3>Зображення:</h3>
+            <img src="{{ image_url }}" alt="Згенероване зображення" width="100%">
+        </div>
+        {% endif %}
+    </form>
+</div>
+
+</body>
+</html>
