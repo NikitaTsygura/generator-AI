@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from .forms import PromptForm
 from django.contrib.auth.forms import UserCreationForm
+from project.settings import API_KEY
 
 import openai
-openai.ape_key = ""
-client = openai.OpenAI()
-openai.api_key = settings.OPENAI_API_KEY
+# openai.ape_key = ""
+client = openai.OpenAI(api_key=API_KEY)
+
 
 # Create your views here.
 def home(request):
@@ -26,7 +27,27 @@ def home(request):
                 ]
             )
 
-            response_text = completion.choices[0].message["content"]
+            response_text = completion.choices[0].message.content
+
+            # generation of images
+
+            # image_result = client.images.generate(
+            #     model="dall-e-3",
+            #     prompt=prompt
+            # )
+            #
+            # response_image = image_result.data[0].url
+
+            image_result = client.images.generate(
+                model="gpt-image-1",
+                prompt=prompt
+            )
+
+            image_base64 = image_result.data[0].b64_json
+            response_image = image_base64.b64decode(image_base64)
+
+
+
 
     else:
         form = PromptForm
