@@ -16,9 +16,13 @@ def home(request):
     if request.method == "POST":
         form= PromptForm(request.POST)
         #is_valid
+
+        selected_options = request.POST.getlist("options")
+
         if form.is_valid():
             prompt = form.cleaned_data["prompt"]
 
+        if "text" in selected_options:
             completion = client.chat.completions.create(
                 model="gpt-4.1",
                 messages=[
@@ -37,7 +41,7 @@ def home(request):
             # )
             #
             # response_image = image_result.data[0].url
-
+        if "image" in selected_options:
             image_result = client.images.generate(
                 model="gpt-image-1",
                 prompt=prompt
@@ -46,7 +50,9 @@ def home(request):
             image_base64 = image_result.data[0].b64_json
             response_image = image_base64.b64decode(image_base64)
 
-
+            # Save the image to a file
+            with open("otter.png", "wb") as f:
+                f.write(response_image)
 
 
     else:
