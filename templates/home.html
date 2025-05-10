@@ -9,7 +9,7 @@
   {% if user.is_authenticated %}
     <p>👋 Вітаємо, {{ user.username }}!</p>
   {% else %}
-    <p class="text-muted">Ви зараз як гість. <a href="{% url 'register' %}">Зареєструйтеся</a>, щоб мати історію!</p>
+    <p class="text-muted">Ви зараз як гість. <a href="{% url 'signup' %}">Зареєструйтеся</a>, щоб мати історію!</p>
   {% endif %}
 
   <form method="post" class="mb-4">
